@@ -16,6 +16,7 @@ public class MoveScript : MonoBehaviour {
 	public Sprite powerSprite;
 	public AudioSource pew;
 	public AudioSource power;
+	public Camera gameCamera;
 
 	private bool canShoot = true;
 
@@ -97,7 +98,7 @@ public class MoveScript : MonoBehaviour {
 	void Update () {
 		Vector3 mousePos = Input.mousePosition;
 		mousePos.z = 10f;
-		Vector3 objectPos = Camera.main.WorldToScreenPoint (transform.position);
+		Vector3 objectPos = gameCamera.WorldToScreenPoint (transform.position);
 		mousePos.x = mousePos.x - objectPos.x;
 		mousePos.y = mousePos.y - objectPos.y;
 		float angle = Mathf.Atan2 (mousePos.y, mousePos.x) * Mathf.Rad2Deg;
