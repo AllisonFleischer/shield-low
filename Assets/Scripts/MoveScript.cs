@@ -6,6 +6,7 @@ public class MoveScript : MonoBehaviour {
 	public float speed = 1.0f;
 	public float regenTime = .25f;
 	public float reloadTime = .75f;
+	public bool debugMode = false;
 	public GameObject bullet;
 	public GameObject playerHit;
 	public GameObject playerExplosion;
@@ -21,6 +22,7 @@ public class MoveScript : MonoBehaviour {
 
 	private Vector3 mousePos;
 	private Vector3 objectPos;
+	static public Vector3 bulletTarget;
 	private float angle;
 
 	void Start () {
@@ -67,7 +69,9 @@ public class MoveScript : MonoBehaviour {
 		if (coll.gameObject.CompareTag ("EnemyBullet")) {
 			Instantiate (playerHit, transform.position, transform.rotation);
 			Destroy (coll.gameObject);
-			playerHealth -= 10;
+			if (!debugMode) {
+				playerHealth -= 10;
+			}
 		} else if (coll.gameObject.CompareTag ("Powerup")) {
 			power.Play();
 			Destroy (coll.gameObject);
@@ -75,7 +79,9 @@ public class MoveScript : MonoBehaviour {
 		} else if (coll.gameObject.CompareTag ("BossBullet")) {
 			Instantiate (smallExplosion, transform.position, transform.rotation);
 			Destroy (coll.gameObject);
-			playerHealth -= 1;
+			if (!debugMode) {
+				playerHealth -= 1;
+			}
 		}
 	}
 
@@ -98,6 +104,9 @@ public class MoveScript : MonoBehaviour {
 		Vector3 mousePos = Input.mousePosition;
 		mousePos.z = 10f;
 		Vector3 objectPos = Camera.main.WorldToScreenPoint (transform.position);
+		//mousePos = mousePos / 10;
+		//objectPos.x = objectPos.x - 16;
+		bulletTarget = objectPos;
 		mousePos.x = mousePos.x - objectPos.x;
 		mousePos.y = mousePos.y - objectPos.y;
 		float angle = Mathf.Atan2 (mousePos.y, mousePos.x) * Mathf.Rad2Deg;
