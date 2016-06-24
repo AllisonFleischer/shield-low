@@ -106,7 +106,6 @@ public class MoveScript : MonoBehaviour {
 		Vector3 objectPos = Camera.main.WorldToScreenPoint (transform.position);
 		//mousePos = mousePos / 10;
 		//objectPos.x = objectPos.x - 16;
-		objectPos = transform.position;
 		bulletTarget = objectPos;
 		mousePos.x = mousePos.x - objectPos.x;
 		mousePos.y = mousePos.y - objectPos.y;
