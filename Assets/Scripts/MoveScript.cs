@@ -22,6 +22,7 @@ public class MoveScript : MonoBehaviour {
 
 	private Vector3 mousePos;
 	private Vector3 objectPos;
+	static public Vector3 bulletTarget;
 	private float angle;
 
 	void Start () {
@@ -103,6 +104,10 @@ public class MoveScript : MonoBehaviour {
 		Vector3 mousePos = Input.mousePosition;
 		mousePos.z = 10f;
 		Vector3 objectPos = Camera.main.WorldToScreenPoint (transform.position);
+		//mousePos = mousePos / 10;
+		//objectPos.x = objectPos.x - 16;
+		objectPos = transform.position;
+		bulletTarget = objectPos;
 		mousePos.x = mousePos.x - objectPos.x;
 		mousePos.y = mousePos.y - objectPos.y;
 		float angle = Mathf.Atan2 (mousePos.y, mousePos.x) * Mathf.Rad2Deg;
