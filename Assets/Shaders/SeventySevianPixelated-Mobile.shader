@@ -6,7 +6,7 @@ Shader "SeventySevian/Pixelated-Mobile" {
 			_MainTex ("Base (RGB) Trans (A)", 2D) = "white" {}
 			_Color ("Color", Color) = (1, 1, 1, 1)
 			//_PixelCountU ("Pixel Count U", Range (1, 500)) = 100
-			_PixelCount ("Pixel Count", Range (1, 500)) = 100
+			_PixelCount ("Pixel Count", Range (1, 500)) = 200
 		}
 	 
 		SubShader 
