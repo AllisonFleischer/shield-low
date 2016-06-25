@@ -8,7 +8,7 @@ Shader "SeventySevian/Pixelated-Mobile" {
 			//_PixelCountU ("Pixel Count U", Range (1, 500)) = 100
 			_PixelCount ("Pixel Count", Range (1, 500)) = 200
 	}
- 
+	
 	SubShader 
 	{
 		Tags {"Queue"="Transparent" "RenderType"="Transparent"}
@@ -22,13 +22,13 @@ Shader "SeventySevian/Pixelated-Mobile" {
 			CGPROGRAM 
 			#pragma vertex vert
 			#pragma fragment frag
-							
+
 			#include "UnityCG.cginc"
 			
 			sampler2D _MainTex;	
 			fixed4 _Color;
 			half _PixelCount;
-					
+
 			struct v2f 
 			{
 			    float4 pos : SV_POSITION;
@@ -51,7 +51,7 @@ Shader "SeventySevian/Pixelated-Mobile" {
 				
 				half2 uv = half2((int)(i.uv.x / pixelWidth) * pixelWidth, (int)(i.uv.y / pixelHeight) * pixelHeight);
 				fixed4 col = tex2D(_MainTex, uv);
-			
+				
 			    return col * _Color;
 			}
 			ENDCG
