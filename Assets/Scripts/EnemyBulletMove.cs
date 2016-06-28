@@ -5,7 +5,6 @@ public class EnemyBulletMove : MonoBehaviour {
 
 	public float bulletSpeed;
 	public GameObject player;
-	public float decayTime = 10f;
 	public Vector3 playerSkew;
 
 	private Vector3 dir;
@@ -21,12 +20,9 @@ public class EnemyBulletMove : MonoBehaviour {
 		GetComponent<Rigidbody2D>().AddForce (dir * bulletSpeed);
 		transform.rotation = Quaternion.LookRotation (dir);
 		transform.Rotate (new Vector3 (0f, -90f, 0f));
-		StartCoroutine(Decay());
 	}
 
-	IEnumerator Decay ()
-	{
-		yield return new WaitForSeconds (decayTime);
+	void OnBecameInvisible () {
 		Destroy (this.gameObject);
 	}
 
