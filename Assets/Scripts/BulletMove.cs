@@ -4,7 +4,6 @@ using System.Collections;
 public class BulletMove : MonoBehaviour {
 
 	public float bulletSpeed;
-	public float decayTime = 10f;
 	public Vector3 playerSkew;
 
 	// Use this for initialization
@@ -13,12 +12,9 @@ public class BulletMove : MonoBehaviour {
 		Vector3 sp = Camera.main.WorldToScreenPoint (transform.position);
 		Vector3 dir = (Input.mousePosition - sp).normalized;
 		GetComponent<Rigidbody2D>().AddForce (dir * bulletSpeed);
-		StartCoroutine(Decay());
 	}
-
-	IEnumerator Decay ()
-	{
-		yield return new WaitForSeconds (decayTime);
+		
+	void OnBecameInvisible () {
 		Destroy (this.gameObject);
 	}
 	
