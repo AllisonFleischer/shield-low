@@ -7,55 +7,55 @@ Shader "SeventySevian/Pixelated-Mobile" {
 			_Color ("Color", Color) = (1, 1, 1, 1)
 			//_PixelCountU ("Pixel Count U", Range (1, 500)) = 100
 			_PixelCount ("Pixel Count", Range (1, 500)) = 200
-	}
-	
-	SubShader 
-	{
-		Tags {"Queue"="Transparent" "RenderType"="Transparent"}
-		LOD 100
-		
-		Lighting Off
-		Blend SrcAlpha OneMinusSrcAlpha 
-		
-        	Pass 
-        	{            
-			CGPROGRAM 
-			#pragma vertex vert
-			#pragma fragment frag
-
-			#include "UnityCG.cginc"
+		}
+	 
+		SubShader 
+		{
+			Tags {"Queue"="Transparent" "RenderType"="Transparent"}
+			LOD 100
 			
-			sampler2D _MainTex;	
-			fixed4 _Color;
-			half _PixelCount;
-
-			struct v2f 
-			{
-			    float4 pos : SV_POSITION;
-			    float2 uv : TEXCOORD1;
-			};
+			Lighting Off
+			Blend SrcAlpha OneMinusSrcAlpha 
 			
-			v2f vert(appdata_base v)
-			{
-			    v2f o;			    
-			    o.uv = v.texcoord.xy;
-			    o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
-			    
-			    return o;
-			}
-			
-			fixed4 frag(v2f i) : COLOR
-			{   
-				fixed pixelWidth = 1.0f / _PixelCount;
-				fixed pixelHeight = 1.0f / _PixelCount;
+	        	Pass 
+	        	{            
+				CGPROGRAM 
+				#pragma vertex vert
+				#pragma fragment frag
+								
+				#include "UnityCG.cginc"
 				
-				half2 uv = half2((int)(i.uv.x / pixelWidth) * pixelWidth, (int)(i.uv.y / pixelHeight) * pixelHeight);
-				fixed4 col = tex2D(_MainTex, uv);
+				sampler2D _MainTex;	
+				fixed4 _Color;
+				half _PixelCount;
+						
+				struct v2f 
+				{
+				    float4 pos : SV_POSITION;
+				    float2 uv : TEXCOORD1;
+				};
 				
-			    return col * _Color;
-			}
-			ENDCG
-	  	}
+				v2f vert(appdata_base v)
+				{
+				    v2f o;			    
+				    o.uv = v.texcoord.xy;
+				    o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
+				    
+				    return o;
+				}
+				
+				fixed4 frag(v2f i) : COLOR
+				{   
+					fixed pixelWidth = 1.0f / _PixelCount;
+					fixed pixelHeight = 1.0f / _PixelCount;
+					
+					half2 uv = half2((int)(i.uv.x / pixelWidth) * pixelWidth, (int)(i.uv.y / pixelHeight) * pixelHeight);
+					fixed4 col = tex2D(_MainTex, uv);
+				
+				    return col * _Color;
+				}
+				ENDCG
+		  	}
+		}
+	 FallBack "Diffuse"
 	}
-	FallBack "Diffuse"
-}
