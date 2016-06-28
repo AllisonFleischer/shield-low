@@ -1,0 +1,7 @@
+CREDITS: GET THESE INGAME LATER
+
+game by crazya02
+sprites by NotNewAnymore
+
+Pixel shader by SeventySevian and inbgche
+Font: "SwissSans" by Format
