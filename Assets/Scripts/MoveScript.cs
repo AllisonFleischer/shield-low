@@ -18,12 +18,16 @@ public class MoveScript : MonoBehaviour {
 	public AudioSource pew;
 	public AudioSource power;
 
+	public Pool pool;
+
 	private bool canShoot = true;
 
 	private Vector3 mousePos;
 	private Vector3 objectPos;
 	static public Vector3 bulletTarget;
 	private float angle;
+
+	// BUILT-IN UNITY FUNCTIONS:
 
 	void Start () {
 		playerHealth = MaxHealth;
@@ -49,14 +53,14 @@ public class MoveScript : MonoBehaviour {
 		if (Input.GetButton ("Fire1")) {
 			if (canShoot) {
 				pew.Play();
-				Instantiate (bullet, transform.position, transform.rotation);
+				Fire ();
 				StartCoroutine (Reload ());
 				GetComponent<SpriteRenderer> ().sprite = normalSprite;
 			}
 		} else if (Input.GetButton ("Fire2")) {
 			if (playerHealth > 1) {
 				pew.Play();
-				Instantiate (bullet, transform.position, transform.rotation);
+				Fire ();
 				playerHealth--;
 				GetComponent<SpriteRenderer> ().sprite = powerSprite;
 			}
@@ -85,21 +89,6 @@ public class MoveScript : MonoBehaviour {
 		}
 	}
 
-	IEnumerator Regen() {
-		while (true) {
-			yield return new WaitForSeconds (regenTime);
-			if (playerHealth < 100) {
-				playerHealth++;
-			}
-		}
-	}
-
-	IEnumerator Reload() {
-		canShoot = false;
-		yield return new WaitForSeconds (reloadTime);
-		canShoot = true;
-	}
-
 	void Update () {
 		Vector3 mousePos = Input.mousePosition;
 		mousePos.z = 10f;
@@ -111,5 +100,26 @@ public class MoveScript : MonoBehaviour {
 		mousePos.y = mousePos.y - objectPos.y;
 		float angle = Mathf.Atan2 (mousePos.y, mousePos.x) * Mathf.Rad2Deg;
 		transform.rotation = Quaternion.Euler (new Vector3 (0, 0, angle));
+	}
+
+	// OTHER FUNCTIONS:
+
+	IEnumerator Regen () {
+		while (true) {
+			yield return new WaitForSeconds (regenTime);
+			if (playerHealth < 100) {
+				playerHealth++;
+			}
+		}
+	}
+
+	IEnumerator Reload () {
+		canShoot = false;
+		yield return new WaitForSeconds (reloadTime);
+		canShoot = true;
+	}
+
+	void Fire() {
+		Instantiate (bullet, transform.position, transform.rotation);
 	}
 }
