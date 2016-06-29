@@ -18,7 +18,7 @@ public class MoveScript : MonoBehaviour {
 	public AudioSource pew;
 	public AudioSource power;
 
-	public Pool pool;
+	[HideInInspector] static public Pool pool;
 
 	private bool canShoot = true;
 
@@ -120,6 +120,6 @@ public class MoveScript : MonoBehaviour {
 	}
 
 	void Fire() {
-		Instantiate (bullet, transform.position, transform.rotation);
+		//Instantiate (bullet, transform.position, transform.rotation);
 	}
 }
