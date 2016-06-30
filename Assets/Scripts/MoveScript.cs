@@ -121,5 +121,6 @@ public class MoveScript : MonoBehaviour {
 
 	void Fire() {
 		//Instantiate (bullet, transform.position, transform.rotation);
+		bullet.gameObject.transform.position = transform.position; //Wait, what?
 	}
 }
