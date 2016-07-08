@@ -7,7 +7,7 @@ public class MoveScript : MonoBehaviour {
 	public float regenTime = .25f;
 	public float reloadTime = .75f;
 	public bool debugMode = false;
-	//public GameObject bullet;
+	public GameObject bullet;
 	public GameObject playerHit;
 	public GameObject playerExplosion;
 	public GameObject smallExplosion;
@@ -19,7 +19,7 @@ public class MoveScript : MonoBehaviour {
 	public AudioSource power;
 
 	[HideInInspector] static public Pool pool;
-	public PoolMember bullet;
+	//public PoolMember bullet;
 
 	private bool canShoot = true;
 
@@ -33,7 +33,8 @@ public class MoveScript : MonoBehaviour {
 	void Start () {
 		playerHealth = MaxHealth;
 		StartCoroutine(Regen());
-		bullet = (PoolMember) Resources.Load ("Prefabs/Bullets/Bullet");
+		//bullet = (PoolMember) Resources.Load ("Prefabs/Bullets/Bullet");
+		pool.thing = bullet;
 	}
 
 	void FixedUpdate () {
