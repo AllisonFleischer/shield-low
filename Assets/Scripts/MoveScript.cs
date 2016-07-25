@@ -6,7 +6,7 @@ public class MoveScript : MonoBehaviour {
 	public float speed = 1.0f;
 	public float regenTime = .25f;
 	public float reloadTime = .75f;
-	public bool debugMode = false;
+	public bool invincibleMode = false;
 	public GameObject bullet;
 	public GameObject playerHit;
 	public GameObject playerExplosion;
@@ -75,7 +75,7 @@ public class MoveScript : MonoBehaviour {
 		if (coll.gameObject.CompareTag ("EnemyBullet")) {
 			Instantiate (playerHit, transform.position, transform.rotation);
 			Destroy (coll.gameObject);
-			if (!debugMode) {
+			if (!invincibleMode) {
 				playerHealth -= 10;
 			}
 		} else if (coll.gameObject.CompareTag ("Powerup")) {
@@ -85,7 +85,7 @@ public class MoveScript : MonoBehaviour {
 		} else if (coll.gameObject.CompareTag ("BossBullet")) {
 			Instantiate (smallExplosion, transform.position, transform.rotation);
 			Destroy (coll.gameObject);
-			if (!debugMode) {
+			if (!invincibleMode) {
 				playerHealth -= 1;
 			}
 		}
