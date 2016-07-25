@@ -7,7 +7,7 @@ public class BulletMove : MonoBehaviour {
 	public Vector3 playerSkew;
 
 	// Use this for initialization
-	void Start () {
+	void OnEnable () {
 		// Mouse targeting
 		Vector3 sp = Camera.main.WorldToScreenPoint (transform.position);
 		Vector3 dir = (Input.mousePosition - sp).normalized;
@@ -15,7 +15,8 @@ public class BulletMove : MonoBehaviour {
 	}
 		
 	void OnBecameInvisible () {
-		Destroy (this.gameObject);
+		//Destroy (this.gameObject);
+		gameObject.SetActive(false);
 	}
 	
 	// Update is called once per frame

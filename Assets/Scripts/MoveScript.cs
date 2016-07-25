@@ -18,8 +18,7 @@ public class MoveScript : MonoBehaviour {
 	public AudioSource pew;
 	public AudioSource power;
 
-	[HideInInspector] static public Pool pool;
-	//public PoolMember bullet;
+	[SerializeField] Pool pool;
 
 	private bool canShoot = true;
 
@@ -124,6 +123,7 @@ public class MoveScript : MonoBehaviour {
 
 	void Fire() {
 		//Instantiate (bullet, transform.position, transform.rotation);
-		pool.nextThing.transform.position = this.transform.position;
+		GameObject clone = pool.nextThing;
+		clone.transform.position = transform.position;
 	}
 }
