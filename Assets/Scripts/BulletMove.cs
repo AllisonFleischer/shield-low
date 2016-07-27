@@ -7,18 +7,18 @@ public class BulletMove : MonoBehaviour {
 	public Vector3 playerSkew;
 
 	// Use this for initialization
-	void Start () {
-		// Mouse targeting
-		Vector3 sp = Camera.main.WorldToScreenPoint (transform.position);
-		Vector3 dir = (Input.mousePosition - sp).normalized;
-		GetComponent<Rigidbody2D>().AddForce (dir * bulletSpeed);
+	void OnEnable () {
+		
 	}
 		
 	void OnBecameInvisible () {
-		Destroy (this.gameObject);
+		//Destroy (this.gameObject);
+		gameObject.SetActive(false);
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		// Face toward direction of movement
+		transform.right = GetComponent<Rigidbody2D> ().velocity;
 	}
 }

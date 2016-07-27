@@ -3,10 +3,11 @@ using System.Collections;
 
 public class MoveScript : MonoBehaviour {
 
+	public bool invincibleMode = false;
 	public float speed = 1.0f;
 	public float regenTime = .25f;
 	public float reloadTime = .75f;
-	public bool debugMode = false;
+	public float bulletSpeed;
 	public GameObject bullet;
 	public GameObject playerHit;
 	public GameObject playerExplosion;
@@ -18,7 +19,7 @@ public class MoveScript : MonoBehaviour {
 	public AudioSource pew;
 	public AudioSource power;
 
-	public Pool pool;
+	[SerializeField] Pool pool;
 
 	private bool canShoot = true;
 
@@ -32,6 +33,8 @@ public class MoveScript : MonoBehaviour {
 	void Start () {
 		playerHealth = MaxHealth;
 		StartCoroutine(Regen());
+		//bullet = (PoolMember) Resources.Load ("Prefabs/Bullets/Bullet");
+		pool.thing = bullet;
 	}
 
 	void FixedUpdate () {
@@ -73,7 +76,7 @@ public class MoveScript : MonoBehaviour {
 		if (coll.gameObject.CompareTag ("EnemyBullet")) {
 			Instantiate (playerHit, transform.position, transform.rotation);
 			Destroy (coll.gameObject);
-			if (!debugMode) {
+			if (!invincibleMode) {
 				playerHealth -= 10;
 			}
 		} else if (coll.gameObject.CompareTag ("Powerup")) {
@@ -83,7 +86,7 @@ public class MoveScript : MonoBehaviour {
 		} else if (coll.gameObject.CompareTag ("BossBullet")) {
 			Instantiate (smallExplosion, transform.position, transform.rotation);
 			Destroy (coll.gameObject);
-			if (!debugMode) {
+			if (!invincibleMode) {
 				playerHealth -= 1;
 			}
 		}
@@ -120,6 +123,13 @@ public class MoveScript : MonoBehaviour {
 	}
 
 	void Fire() {
-		Instantiate (bullet, transform.position, transform.rotation);
+		// "Instantiate" bullet from pool
+		GameObject clone = pool.nextThing;
+		clone.transform.position = transform.position;
+
+		// Set bullet velocity towards mouse
+		Vector3 sp = Camera.main.WorldToScreenPoint (transform.position);
+		Vector3 dir = (Input.mousePosition - sp).normalized;
+		clone.GetComponent<Rigidbody2D>().AddForce (dir * bulletSpeed);
 	}
 }

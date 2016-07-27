@@ -41,7 +41,7 @@ public class EnemyTest : MonoBehaviour {
 	void OnTriggerEnter2D (Collider2D coll) {
 		if (Awake) {
 			if ((coll.gameObject.CompareTag ("PlayerBullet")) && invincible == false) {
-				Destroy (coll.gameObject);
+				coll.gameObject.SetActive (false);
 				Instantiate (hitExplosion, transform.position, transform.rotation);
 				enemyHealth -= 10;
 			}

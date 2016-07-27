@@ -1,4 +1,6 @@
-﻿using UnityEngine;  
+﻿//CODE BY Richard Gubb
+
+using UnityEngine;  
 using System.Collections;  
 public class PoolMember : MonoBehaviour {  
 	public Pool pool;  
