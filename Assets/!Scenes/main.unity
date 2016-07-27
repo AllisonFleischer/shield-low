@@ -1096,6 +1096,14 @@ Prefab:
       propertyPath: pool
       value: 
       objectReference: {fileID: 861837562}
+    - target: {fileID: 11405010, guid: 38ba32cbfeeebd845b6db471fbab6ba9, type: 2}
+      propertyPath: invincibleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11405010, guid: 38ba32cbfeeebd845b6db471fbab6ba9, type: 2}
+      propertyPath: bulletSpeed
+      value: 500
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 38ba32cbfeeebd845b6db471fbab6ba9, type: 2}
   m_IsPrefabParent: 0

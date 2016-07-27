@@ -3,10 +3,11 @@ using System.Collections;
 
 public class MoveScript : MonoBehaviour {
 
+	public bool invincibleMode = false;
 	public float speed = 1.0f;
 	public float regenTime = .25f;
 	public float reloadTime = .75f;
-	public bool invincibleMode = false;
+	public float bulletSpeed;
 	public GameObject bullet;
 	public GameObject playerHit;
 	public GameObject playerExplosion;
@@ -125,5 +126,8 @@ public class MoveScript : MonoBehaviour {
 		//Instantiate (bullet, transform.position, transform.rotation);
 		GameObject clone = pool.nextThing;
 		clone.transform.position = transform.position;
+		Vector3 sp = Camera.main.WorldToScreenPoint (transform.position);
+		Vector3 dir = (Input.mousePosition - sp).normalized;
+		clone.GetComponent<Rigidbody2D>().AddForce (dir * bulletSpeed);
 	}
 }

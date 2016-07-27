@@ -5,3 +5,5 @@ sprites by NotNewAnymore
 
 Pixel shader by SeventySevian and inbgche
 Font: "SwissSans" by Format
+
+Object pooling code by Richard Gubb
