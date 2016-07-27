@@ -8,10 +8,7 @@ public class BulletMove : MonoBehaviour {
 
 	// Use this for initialization
 	void OnEnable () {
-		// Mouse targeting (Tried moving to player's MoveScript)
-		/*Vector3 sp = Camera.main.WorldToScreenPoint (transform.position);
-		Vector3 dir = (Input.mousePosition - sp).normalized;
-		GetComponent<Rigidbody2D>().AddForce (dir * bulletSpeed);*/
+		
 	}
 		
 	void OnBecameInvisible () {
@@ -21,5 +18,7 @@ public class BulletMove : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		// Face toward direction of movement
+		transform.right = GetComponent<Rigidbody2D> ().velocity;
 	}
 }

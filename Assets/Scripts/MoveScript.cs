@@ -123,9 +123,11 @@ public class MoveScript : MonoBehaviour {
 	}
 
 	void Fire() {
-		//Instantiate (bullet, transform.position, transform.rotation);
+		// "Instantiate" bullet from pool
 		GameObject clone = pool.nextThing;
 		clone.transform.position = transform.position;
+
+		// Set bullet velocity towards mouse
 		Vector3 sp = Camera.main.WorldToScreenPoint (transform.position);
 		Vector3 dir = (Input.mousePosition - sp).normalized;
 		clone.GetComponent<Rigidbody2D>().AddForce (dir * bulletSpeed);
